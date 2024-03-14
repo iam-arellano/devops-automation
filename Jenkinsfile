@@ -30,7 +30,7 @@ pipeline {
                    withCredentials([string(credentialsId: 'jenkins-docker-credentials', variable: 'jenkins-docker-credentials')]) {
                    sh 'docker login -u raemond.arellano -p ${jenkins-docker-credentials}'
                 }
-                   sh 'docker push raemond.arellano/devops-automation'
+                   sh 'docker push raemond.arellano/devops-automation:latest'
                 }
             }
         }
