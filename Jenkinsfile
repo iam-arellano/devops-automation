@@ -15,25 +15,38 @@ pipeline {
                sh 'mvn clean install'
             }
         }
+
+                stage('Docker Build & Push') {
+            steps {
+                   script {
+                 
+                            withDockerRegistry(credentialsId: 'jenkins-docker-credentials', toolName: 'docker-from-manage-tools')  {
+                            sh "docker build -t devops-automation ."
+                            sh "docker tag devops-automation raemondarellano/devops-automation:latest"
+                            sh "docker push raemondarellano/devops-automation:latest "
+                        }
+                   } 
+            }
+        }
         
 
-        stage('Build docker image'){
-            steps{
-                script{
-                    sh 'docker build -t raemond.arellano/devops-automation .'
-                }
-            }
-        }
-        stage('Push Docker image to Hub'){
-            steps{
-                script{
-                    withDockerRegistry(credentialsId: 'jenkins-docker-credentials', toolName: 'docker-from-manage-tools')  {
-                         sh "docker tag devops-automation raemond.arellano/devops-automation:latest"
-                          sh "docker push raemond.arellano/devops-automation:latest "
-                    }
-                }
-            }
-        }
+        // stage('Build docker image'){
+        //     steps{
+        //         script{
+        //             sh 'docker build -t raemond.arellano/devops-automation .'
+        //         }
+        //     }
+        // }
+        // stage('Push Docker image to Hub'){
+        //     steps{
+        //         script{
+        //             withDockerRegistry(credentialsId: 'jenkins-docker-credentials', toolName: 'docker-from-manage-tools')  {
+        //                  sh "docker tag devops-automation raemond.arellano/devops-automation:latest"
+        //                   sh "docker push raemond.arellano/devops-automation:latest "
+        //             }
+        //         }
+        //     }
+        // }
         // stage('Deploy to k8s'){
         //     steps{
         //         script{
