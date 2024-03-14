@@ -28,7 +28,7 @@ pipeline {
             steps{
                 script{
                  withDockerRegistry(credentialsId: 'jenkins-docker-credentials')  {
-          //    sh "docker tag springboot-webappraemond.arellano/devops-automation:latest"
+             sh "docker tag devops-automation raemond.arellano/devops-automation:latest"
               sh "docker push raemond.arellano/devops-automation:latest "
                     }
                 }
