@@ -24,13 +24,13 @@ pipeline {
                 }
             }
         }
-        stage('Push image to Hub'){
+        stage('Push Docker image to Hub'){
             steps{
                 script{
-                   withCredentials([string(credentialsId: 'jenkins-docker-credentials', variable: 'jenkins-docker-credentials')]) {
-                   sh 'docker login -u raemond.arellano -p ${jenkins-docker-credentials}'
-                }
-                   sh 'docker push raemond.arellano/devops-automation:latest'
+                 withDockerRegistry(credentialsId: 'jenkins-docker-credentials')  {
+              sh "docker tag springboot-webappraemond.arellano/devops-automation:latest"
+              sh "docker push raemond.arellano/devops-automation:latest "
+                    }
                 }
             }
         }
