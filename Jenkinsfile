@@ -27,10 +27,9 @@ pipeline {
         stage('Push image to Hub'){
             steps{
                 script{
-                   withCredentials([string(credentialsId: 'jenkins-docker-credentials', variable: 'dockerhubpwd')]) {
-                   sh 'docker login -u raemond.arellano -p ${dockerhubpwd}'
-
-}
+                   withCredentials([string(credentialsId: 'jenkins-docker-credentials', variable: 'jenkins-docker-credentials')]) {
+                   sh 'docker login -u raemond.arellano -p ${jenkins-docker-credentials}'
+                }
                    sh 'docker push raemond.arellano/devops-automation'
                 }
             }
