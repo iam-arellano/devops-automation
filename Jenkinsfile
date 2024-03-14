@@ -20,7 +20,9 @@ pipeline {
             steps {
                    script {
                  
-                            withDockerRegistry(credentialsId: 'jenkins-docker-credentials', toolName: 'docker-from-manage-tools')  {
+                            // withDockerRegistry(credentialsId: 'jenkins-docker-credentials', toolName: 'docker-from-manage-tools')  {
+
+                            withDockerRegistry(credentialsId: 'jenkins-docker-credentials') {
                             sh "docker build -t devops-automation ."
                             sh "docker tag devops-automation raemondarellano/devops-automation:latest"
                             sh "docker push raemondarellano/devops-automation:latest "
