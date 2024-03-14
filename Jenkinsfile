@@ -27,9 +27,9 @@ pipeline {
         stage('Push Docker image to Hub'){
             steps{
                 script{
-                 withDockerRegistry(credentialsId: 'jenkins-docker-credentials')  {
-             sh "docker tag devops-automation raemond.arellano/devops-automation:latest"
-              sh "docker push raemond.arellano/devops-automation:latest "
+                    withDockerRegistry(credentialsId: 'jenkins-docker-credentials', toolName: 'docker-from-manage-tools')  {
+                         sh "docker tag devops-automation raemond.arellano/devops-automation:latest"
+                          sh "docker push raemond.arellano/devops-automation:latest "
                     }
                 }
             }
